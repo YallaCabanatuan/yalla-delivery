@@ -430,6 +430,10 @@
   .member-number{ display:none; }
   .member-name{ display:block; font-size:16px; font-weight:900; }
   .partner-note{ margin:0; padding:22px; border:3px solid var(--ink); background:var(--cream); text-align:center; font-weight:800; }
+  .partner-card{ overflow:hidden; background:var(--cream); border:3px solid var(--ink); box-shadow:4px 4px 0 rgba(26,26,26,.9); text-decoration:none; color:var(--ink); }
+  .partner-card:hover{ transform:translate(-1px,-1px); box-shadow:5px 5px 0 rgba(26,26,26,.9); }
+  .partner-card img{ display:block; width:100%; aspect-ratio:1/1; object-fit:cover; }
+  .partner-name{ display:block; padding:10px; font-size:16px; font-weight:900; text-align:center; }
   @media (max-width: 620px){
     .site-nav{ top:62px; gap:9px; max-width:calc(100% - 24px); padding:8px 10px; }
     .site-nav a{ font-size:12px; }
@@ -575,7 +579,7 @@
 
   <div class="team-group" id="partners">
     <h3 class="team-group-title">Partners</h3>
-    <p class="partner-note">Partner details coming soon.</p>
+    <div class="team-grid" id="partnersGrid"></div>
   </div>
 </section>
  
@@ -615,6 +619,75 @@
     const label = member.name || `Name for ${member.role} ${member.number}`;
     card.innerHTML = `<img src="team/team-${member.number}.jpg" alt="${label}"><div class="member-copy"><span class="member-number">PHOTO ${member.number}</span><span class="member-name">${label}</span></div>`;
     grid.appendChild(card);
+  });
+
+  // PARTNER EDITING AREA: add a new line here for every partner.
+  // Use a new image named partner-02-name.jpg, partner-03-name.jpg, and so on.
+  const partners = [
+    { name: 'Tongs', link: 'https://www.facebook.com/share/1DkX7ex14X/', image: 'partners/partner-01-tongs.jpg' },
+    { name: 'Coffee Break', link: 'https://www.facebook.com/profile.php?id=61563845622337', image: 'partners/partner-02-Coffee Break.jpg' },
+    { name: 'Mayet Ihaw-Ihaw', link: 'https://www.facebook.com/realmayetihawihawhouse', image: 'partners/partner-03-MayetIhaw.jpg' },
+    { name: 'Solb', link: 'https://www.facebook.com/profile.php?id=61581153451483', image: 'partners/partner-04-Solb.jpg' },
+    { name: 'The Food Trend', link: 'https://www.facebook.com/share/14qrsngQbXu/', image: 'partners/partner-05-Samgyup-Favorites.jpg' },
+    { name: 'Jamaiccas Sushi', link: 'https://www.facebook.com/profile.php?id=100057131572718', image: 'partners/partner-06-Jammaica.jpg' },
+    { name: 'Steak Royalty', link: 'https://www.facebook.com/profile.php?id=100064054869044', image: 'partners/partner-07-Steak.jpg' },
+    { name: 'House Of Authentic Biryani', link: 'https://www.facebook.com/HouseofAuthenticBiryani', image: 'partners/partner-08-HOB.jpg' },
+    { name: 'Taco Tambayan', link: 'https://www.facebook.com/share/1HRXiK6nrb/', image: 'partners/partner-09-Taco.jpg' },
+    { name: 'The Red Oven', link: 'https://www.facebook.com/TheRedOven', image: 'partners/partner-10-Red.jpg' },
+    { name: 'Banatu Grill Station', link: 'https://www.facebook.com/Gangtekoreansamgyupsal', image: 'partners/partner-11-Banatu.jpg' },
+    { name: 'Food Pushers PH', link: 'https://www.facebook.com/share/19MqvdJXBf/', image: 'partners/partner-12-FoodPushers.jpg' },
+    { name: 'RAM Fruit', link: 'https://www.facebook.com/allaboutrams', image: 'partners/partner-13-Ram.jpg' },
+    { name: 'Black Kutsinta And Kanis Dessert House', link: 'https://www.facebook.com/MarisKitchenHub', image: 'partners/partner-14-BK.jpg' },
+    { name: 'Hidden Primitive', link: 'https://www.facebook.com/profile.php?id=100080577745073', image: 'partners/partner-15-Hidden.jpg' },
+    { name: 'Happy Thoughts Cafe', link: 'https://www.facebook.com/happythoughtscafeph', image: 'partners/partner-16-HappyThoughts.jpg' },
+    { name: 'Within The Box', link: 'https://www.facebook.com/share/1LNvubFQxs/', image: 'partners/partner-17-WIthin.jpg' },
+    { name: 'Dr.Alvin', link: 'https://www.facebook.com/share/14gYnYViALj/', image: 'partners/partner-18-DrAlvin.jpg' },
+    { name: 'Homeboys Kitchen', link: 'https://www.facebook.com/homeboyskitchen', image: 'partners/partner-19-Homeboy.jpg' },
+    { name: 'Aqua Bites', link: 'https://www.facebook.com/profile.php?id=61579543357992', image: 'partners/partner-20-Aqua.jpg' },
+    { name: 'Manzoku Cafe', link: 'https://www.facebook.com/manzokucafe', image: 'partners/partner-21-Manzoku.jpg' },
+    { name: 'Bouquet Of Flowers', link: 'https://www.facebook.com/share/18BxsxWMmi/', image: 'partners/partner-22-BOF.jpg' },
+    { name: '3RD SPACE', link: 'https://www.facebook.com/share/1C6GFmrKCu/', image: 'partners/partner-23-3rd.jpg' },
+    { name: 'Hola Cabanatuan', link: 'https://www.facebook.com/HolaCabanatuan', image: 'partners/partner-24-Hola.jpg' },
+    { name: 'Quality Chef', link: 'https://www.facebook.com/share/1PMiYWznia/', image: 'partners/partner-25-Quality.jpg' },
+    { name: 'Nala Cafe', link: 'https://www.facebook.com/nalacafeph', image: 'partners/partner-26-Nala.jpg' },
+    { name: 'Street Birria', link: 'https://www.facebook.com/profile.php?id=61582727008035', image: 'partners/partner-27-Street.jpg' },
+    { name: 'Sushi Corner', link: 'https://www.facebook.com/profile.php?id=61582584434279', image: 'partners/partner-28-sushi.jpg' },
+    { name: 'Tex A Mex', link: 'https://www.facebook.com/share/1JeaPXAVn4/', image: 'partners/partner-29-tex.jpg' },
+    { name: 'Pocholos', link: 'https://www.facebook.com/share/18H3HWec7c/', image: 'partners/partner-30-Pocholo.jpg' },
+    { name: 'Kohi Kurio', link: 'https://www.facebook.com/KohiKurio', image: 'partners/partner-31-Kohi.jpg' },
+    { name: 'Sabines Pizza Hub', link: 'https://www.facebook.com/sabinespizzahub', image: 'partners/partner-32-Sabine.jpg' },
+    { name: 'My Dough', link: 'https://www.facebook.com/profile.php?id=61575828412025', image: 'partners/partner-33-Mydough.jpg' },
+    { name: 'See-Food', link: 'https://www.facebook.com/seefood.cabanatuan', image: 'partners/partner-34-seefood.jpg' },
+    { name: 'Glecy Classy Trends', link: 'https://www.facebook.com/glecysclassytrends', image: 'partners/partner-35-glecy.jpg' },
+    { name: 'CLT Cafe', link: 'https://www.facebook.com/share/1FbGFBDtW6/', image: 'partners/partner-36-CLT.png' },
+    { name: 'The Premium Dessert', link: 'https://www.facebook.com/PremiumDessertbyJay', image: 'partners/partner-37-Dessert.jpg' },
+    { name: 'Cabrera Beek', link: 'https://www.facebook.com/profile.php?id=61570063411540', image: 'partners/partner-38-Beek.jpg' },
+    { name: 'Yapanit', link: 'https://www.facebook.com/YapanitCabanatuan', image: 'partners/partner-39-Yapanit.jpg' },
+    { name: 'Street Shack', link: 'https://www.facebook.com/share/19ZW214s42/', image: 'partners/partner-40-Shack.jpg' },
+    { name: 'IKA BREWS', link: 'https://www.facebook.com/profile.php?id=100064006451178', image: 'partners/partner-41-ika.jpg' },
+    { name: 'Taste Me', link: 'https://www.facebook.com/profile.php?id=100085190680845', image: 'partners/partner-42-Taste.jpg' },
+    { name: 'Otya Lani Meat Store', link: 'https://www.facebook.com/OtyaLaniMeatStore', image: 'partners/partner-43-Otya.jpg' },
+    { name: 'Woodside', link: 'https://www.facebook.com/woodside.resto', image: 'partners/partner-44-Woodside.jpg' },
+    { name: 'Butog Talap', link: 'https://www.facebook.com/share/1YFC8bv7JN/', image: 'partners/partner-45-Butog.jpg' },
+    { name: 'Ne/Ver Coffee', link: 'https://www.facebook.com/auroraclothingcabanatuancity', image: 'partners/partner-46-Never.jpg' },
+    { name: 'Bakud Burikito', link: 'https://www.facebook.com/BAKUDBURIKITO', image: 'partners/partner-47-Bakud.jpg' },
+    { name: 'Tomos Bar And Restaurant', link: 'https://www.facebook.com/TomosBarandRestaurant', image: 'partners/partner-48-Tomos.jpg' },
+    { name: 'Theos Diner', link: 'https://www.facebook.com/theosdinercabanatuan', image: 'partners/partner-49-Theo.png' },
+    { name: 'COOYAH Diner', link: 'https://www.facebook.com/cooyahdiner', image: 'partners/partner-50-Cooyah.png' },
+    { name: 'Frost Bites', link: 'https://www.facebook.com/FrostBitesFroyoAndCafe', image: 'partners/partner-51-Frost.jpg' },
+    { name: 'James Blend', link: 'https://www.facebook.com/jamesblendcafe', image: 'partners/partner-52-James.jpg' },
+    { name: 'Butchers Pri Meat', link: 'https://www.facebook.com/butchersprimeat', image: 'partners/partner-53-Butchers.png' },
+    { name: 'CHIN Cafe', link: 'https://www.facebook.com/share/1Bsy3Q4t7X/', image: 'partners/partner-54-CHIN.jpg' }
+  ];
+  const partnersGrid = document.getElementById('partnersGrid');
+  partners.forEach((partner) => {
+    const card = document.createElement('a');
+    card.className = 'partner-card';
+    card.href = partner.link;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    card.innerHTML = `<img src="${partner.image}" alt="${partner.name}"><span class="partner-name">${partner.name}</span>`;
+    partnersGrid.appendChild(card);
   });
 
   // Only these approved destinations can be opened by the contact buttons.
