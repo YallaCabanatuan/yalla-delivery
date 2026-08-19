@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,13 +88,6 @@
     width: 170px;
     height: 170px;
     margin: 0 auto 18px;
-    background: rgb(250,176,69);
-    border-radius: 14px;
-    display:flex;
-  .logo-box{
-    width: 170px;
-    height: 170px;
-    margin: 0 auto 18px;
     background: transparent;
     display:flex;
     align-items:center;
@@ -131,6 +125,7 @@
     opacity: 0.75;
     margin: 2px 0 0;
   }
+
   .site-nav{
     position: fixed;
     top: 16px;
@@ -156,6 +151,7 @@
     border-bottom: 2px solid var(--ink);
   }
   .site-nav a:hover{ border-bottom-color: var(--yellow-deep); }
+
   .services{
     display: flex;
     flex-wrap: wrap;
@@ -367,6 +363,7 @@
   @media (max-width: 420px){
     .wrap{ padding: 36px 18px 60px; }
   }
+
   .language-picker{
     position: fixed;
     inset: 0;
@@ -410,6 +407,7 @@
     font-size: 16px;
   }
   body.language-selected .language-back{ display:block; }
+
   .team-section{
     position: relative;
     z-index: 2;
@@ -456,6 +454,7 @@
 </style>
 </head>
 <body>
+
 <nav class="site-nav" aria-label="Main navigation">
   <a href="#home">Home</a>
   <a href="#team">Riders, Admins &amp; Owners</a>
@@ -506,6 +505,7 @@
   <h1 class="brand">Yalla Delivery</h1>
   <div class="tagline" data-i18n="location">Based in Cabanatuan City</div>
   <div class="tagline sub" data-i18n="established">Est 2025</div>
+
   <div class="services" aria-label="Yalla Delivery services">
     <span class="service-item">Food</span>
     <span class="service-item">Grocery</span>
@@ -570,9 +570,11 @@
   <div class="comeback" data-i18n="comeBack">#ComeBackSoon ♡</div>
  
 </div>
+
 <section class="team-section" id="team">
   <h2 class="team-heading">Meet the Yalla Team</h2>
   <p class="team-intro">Our owners, admins, and riders.</p>
+
   <div class="team-group">
     <h3 class="team-group-title">Owners</h3>
     <div class="team-grid" id="ownersGrid"></div>
@@ -585,6 +587,7 @@
     <h3 class="team-group-title">Riders</h3>
     <div class="team-grid" id="ridersGrid"></div>
   </div>
+
   <div class="team-group" id="partners">
     <h3 class="team-group-title">Partners</h3>
     <div class="team-grid" id="partnersGrid"></div>
@@ -592,9 +595,10 @@
 </section>
  
 <footer class="site-footer" data-i18n="footer">© Yalla Delivery 2025. All rights reserved.</footer>
+
 <script>
-  // Main logo at the top of the page.
   document.querySelector('.logo-box img').src = 'assets/yalla-delivery-no-bg.png';
+
   // TEAM EDITING AREA: write each person's name between the quotes.
   // To move a person, change role to: 'Owner', 'Admin', or 'Rider'.
   const teamMembers = [
@@ -629,6 +633,7 @@
     card.innerHTML = `<img src="team/team-${member.number}.jpg" alt="${label}"><div class="member-copy"><span class="member-number">PHOTO ${member.number}</span><span class="member-name">${label}</span></div>`;
     grid.appendChild(card);
   });
+
   // PARTNER EDITING AREA: add a new line here for every partner.
   // Use a new image named partner-02-name.jpg, partner-03-name.jpg, and so on.
   const partners = [
@@ -707,6 +712,7 @@
     card.innerHTML = `<img src="${partner.image}" alt="${partner.name}"><span class="partner-name">${partner.name}</span>`;
     partnersGrid.appendChild(card);
   });
+
   // Only these approved destinations can be opened by the contact buttons.
   const safeLinks = {
     admin: 'https://www.facebook.com/share/1CXxzmC8Jk/?mibextid=wwXIfr',
@@ -720,6 +726,7 @@
       window.open(destination, '_blank', 'noopener,noreferrer');
     });
   });
+
   const translations = {
     en: {
       location: 'Based in Cabanatuan City', established: 'Est 2025', press: 'Press it!',
@@ -742,6 +749,7 @@
       comeBack: '#BumalikMuli ♡', footer: '© Yalla Delivery 2025. Lahat ng karapatan ay nakalaan.'
     }
   };
+
   const picker = document.getElementById('languagePicker');
   const back = document.getElementById('languageBack');
   function chooseLanguage(language) {
